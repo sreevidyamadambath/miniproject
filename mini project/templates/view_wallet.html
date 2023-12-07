@@ -1,0 +1,21 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    .bg-img{
+    background:url("/static/images/cover.jpg");
+}
+</style>
+{% endblock %}
+{% block dashboard %}
+<div class="container mt-5">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="card-title">Your Wallet</h1>
+                <p class="card-text">Balance: ${{ wallet.balance }}</p>
+                <a href="{% url 'add_money' %}" class="btn btn-primary">Add Money</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

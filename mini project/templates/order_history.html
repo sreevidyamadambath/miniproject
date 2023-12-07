@@ -1,0 +1,67 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    .bg-img {
+        background: url("/static/images/cover.jpg");
+    }
+
+    .order-card {
+        border: 1px solid #dee2e6;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-card-body {
+        padding: 20px;
+    }
+
+    .order-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .order-status {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .order-processed-on {
+        margin-bottom: 20px;
+    }
+
+    .order-items {
+        font-size: 18px;
+    }
+</style>
+{% endblock %}
+{% block dashboard %}
+<div class="container mt-5">
+    <h1>Your Order History</h1>
+
+    {% if order_details %}
+        {% for order_detail in order_details %}
+            <div class="card order-card my-4">
+                <div class="card-body order-card-body">
+                    <h2 class="order-title">Order {{ order_detail.order.id }}</h2>
+                    <p class="order-status">Status: {% if order_detail.order.status %}Paid{% else %}Pending{% endif %}</p>
+                    <p class="order-processed-on">Processed On: {{ order_detail.order.processed_on }}</p>
+
+                    <h3 class="card-subtitle mb-2 text-muted order-items">Order Items:</h3>
+                    <ul class="list-group">
+                        {% for item in order_detail.items %}
+                            <li class="list-group-item">
+                                {{ item.product.item_name }} - Quantity: {{ item.quantity }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No order history available.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

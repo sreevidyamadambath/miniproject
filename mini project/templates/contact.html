@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width", initial-scale="1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 bg-primary text-center py-5 text-light">
+                <h1>This is Contact Page</h1>
+
+            </div>
+            <div class="col-md-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15678.628158812286!2d76.11898895!3d10.76089295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7c72e02a24785%3A0x854099e11a8e7ed7!2sKoottanad%2C%20Kerala%20679533!5e0!3m2!1sen!2sin!4v1700237776605!5m2!1sen!2sin" width="550" height="450" style="border:0;" allowfullscreen="" loading="lazy" align="left" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+
+            <div class="col-md-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Your name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter name.....">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Contact no</label>
+                        <input type="text" class="form-control" name="contact" placeholder="Enter number.....">
+                    </div>
+                    <div class="form-group">
+                        <label>Your subject</label>
+                        <input type="text" class="form-control" name="subject" placeholder="Enter subject.....">
+                    </div>
+                    <div class="form-group">
+                        <label>Your message</label>
+                        <textarea class="form-control" name="msg" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Send Message">
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Previous feed back</h2>
+        <h4 class="text-center"><em>Total:{{messages|length}}</em></h4>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th class>ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>subject</th>
+                <th>message</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for i in messages %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.contact_no}}</td>
+                        <td>{{i.subject}}</td>
+                        <td>{{i.message}}</td>
+                        <td>{{i.added_on}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script>
+    alert{"{{status}}"};
+</script>
+</body>
+</html>

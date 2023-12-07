@@ -1,0 +1,37 @@
+{% extends "first.html" %}
+{% load static %}
+
+{% block head %}
+<style>
+    /* ... (previous styles) ... */
+</style>
+{% endblock %}
+
+{% block myblock %}
+<div class="container mt-5">
+    <h2 class="text-center section-heading mb-4">Chefs in {{ location }}</h2>
+    {% if chefs %}
+        <div class="row">
+            {% for chef in chefs %}
+                <div class="col-md-4">
+                    <div class="chef-card">
+                        <img src="{{ chef.profile_pic.url }}" class="chef-image" alt="{{ chef.user.get_full_name }}">
+                        <div class="chef-details">
+                            <h4 class="chef-name">{{ chef.user.get_full_name }}</h4>
+                            <p class="contact-info">Contact: {{ chef.contact_number }}</p>
+                            <p class="city-info">City: {{ chef.city }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="text-center">
+        <p class="lead">Oops! It seems there are no chefs near you at the moment.</p>
+        <p class="text-muted">But don't worry, our chefs are always cooking up something delicious. Check back later!</p>
+
+    </div>
+{% endif %}
+
+</div>
+{% endblock %}

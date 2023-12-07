@@ -1,0 +1,37 @@
+{% extends "dashboard_base.html" %}
+{% block dashboard %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h2 class="mb-4">Dashboard &gt; My Items</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Item Id</th>
+                        <th>Item Name</th>
+                        <th>Item Image</th>
+                        <th>Item Price</th>
+                        <th>Item Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                        <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.item_name }}</td>
+                            <td><img src="/media/{{ p.item_image }}" style="height: 80px; width: 80px;" alt="{{ p.item_name }}"></td>
+                            <td>{{ p.item_price }}</td>
+                            <td>
+                                <a href="{% url 'update_product' %}?pid={{ p.id }}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="{% url 'delete_product' %}?pid={{ p.id }}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

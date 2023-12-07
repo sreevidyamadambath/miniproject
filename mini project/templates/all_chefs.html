@@ -1,0 +1,48 @@
+{% extends "first.html" %}
+{% load static %}
+
+{% block head %}
+<style>
+    th {
+        width: 30%;
+    }
+
+    .hover:hover {
+        box-shadow: 0px 0px 10px black;
+        padding: 30px;
+    }
+
+    .chef-card {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .chef-image {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block myblock %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Chefs</h2>
+    <div class="row">
+        {% for chef in chefs %}
+            <div class="col-md-4">
+                <div class="chef-card">
+                    <h4>{{ chef.user.get_full_name }}</h4>
+                    <p>Contact: {{ chef.contact_number }}</p>
+                    <p>City: {{ chef.city }}</p>
+                    <img src="{{ chef.profile_pic.url }}" class="chef-image" alt="{{ chef.user.get_full_name }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

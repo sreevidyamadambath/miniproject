@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Name</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'jquery.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        img {
+            width: 100%;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .navbar-brand:hover,
+        .navbar-nav .nav-link:hover {
+            color: #e44d26;
+        }
+
+        .search-container {
+            margin-top: 20px;
+        }
+
+        .search-form {
+            display: flex;
+        }
+
+        .search-input {
+            flex: 2;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-btn {
+            flex: 1;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .categories-container,
+        .products-container,
+        .chefs-container {
+            margin-top: 50px;
+        }
+
+        .category-card,
+        .product-card,
+        .chef-card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .category-image,
+        .product-image,
+        .chef-image {
+            width: 100%;
+            height: auto;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .category-title,
+        .product-title,
+        .chef-title {
+            padding: 15px;
+            text-align: center;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+        .hero-section {
+            background: url("/static/images/hero_background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 1.5em;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12 px-0">
+            <nav class="navbar navbar-expand bg-dark navbar-dark">
+                <a href="{% url 'index' %}" class="navbar-brand">HomeChef</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'about' %}" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'all_products' %}" class="nav-link">All Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'all_chefs' %}" class="nav-link">All Chefs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item mr-2">
+                        <a href="{% url 'reg' %}" class="nav-link">Sign Up</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item mr-2">
+                            <a href="{% url 'cust_dashboard' %}" class="nav-link">Welcome {{ user.username }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item mr-2">
+                            <a href="{% url 'reg' %}" class="btn btn-outline-light">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'log' %}" class="btn btn-outline-light">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {% block myblock %}
+
+    </div>
+    <div class="container search-container" style="background: url('{% static "images/home_back2.jpg" %}') no-repeat center center fixed; background-size: cover; height: 70vh;">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-5 text-center text-white">
+            <h1 class="display-4 font-weight-bold mb-4">Hungry for Delightful Dishes?</h1>
+            <p class="lead mb-4">Explore a culinary journey with our chefs. Order now and savor the flavors you crave.</p>
+            <form class="search-form mb-4" action="{% url 'all_products' %}">
+                <div class="input-group">
+                    <input type="text" name="qry" class="form-control search-input" placeholder="Search for your favorite dish...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-success search-btn"><i class="fa fa-search"></i> Search</button>
+                    </div>
+                </div>
+            </form>
+            <!-- Search Chef Section -->
+            <h2 class="display-5 font-weight-bold mb-3">Discover Talented Chefs Near You</h2>
+            <form action="{% url 'search_chefs' %}" method="get">
+                <div class="input-group">
+                    <input type="text" name="location" class="form-control search-input" placeholder="Enter your location...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-success search-btn"><i class="fa fa-search"></i> Search Chefs</button>
+                    </div>
+                </div>
+            </form>
+            <!-- End Search Chef Section -->
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="container categories-container">
+        <div class="row">
+            <div class="col-md-12 text-center p-5">
+                <h1>Categories</h1>
+            </div>
+            {% for c in category %}
+                <div class="col-md-2 p-4">
+                    <div class="card category-card">
+                        <img src="/media/{{ c.cat_cover_pic }}" class="card-img-top category-image" alt="{{ c.cat_name }}">
+                        <div class="card-body">
+                            <a href="{% url 'all_products' %}?cat={{ c.id }}">
+                                <h4 class="card-title category-title">{{ c.cat_name }}</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container products-container">
+        <div class="row">
+            <div class="col-md-12 text-center p-5">
+                <h1>Products</h1>
+            </div>
+            {% for p in item %}
+                <div class="col-md-2 p-4">
+                    <div class="card product-card">
+                        <img src="/media/{{ p.item_image }}" class="card-img-top product-image" alt="{{ p.item_name }}">
+                        <div class="card-body">
+                            <h4 class="card-title product-title">{{ p.item_name }}</h4>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+    <div class="container-fluid footer mt-5">
+        <div class="row text-center">
+            <div class="col-md-4" style="border-right: 2px solid white;">
+                <h4>About Us</h4>
+                <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nam fuga animi fugiat minima tenetur
+                    ad modi, architecto saepe expedita quisquam. Sed eum soluta vel animi possimus delectus accusantium?
+                    Libero?</small>
+            </div>
+            <div class="col-md-4" style="border-right: 2px solid white;">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>Email: info@mywebsite.com</li>
+                    <li>Phone: +1 (123) 456-7890</li>
+                    <li>Address: 123 Street, City, Country</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

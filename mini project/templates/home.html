@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width", initial-scale="1.0">
+    <title>Home</title>
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h1>This is Home Page</h1>
+                    <p>
+                        Nulla aute irure velit consequat in laboris tempor in adipisicing. Labore officia cupidatat nulla dolore exercitation ad. Esse est dolore Lorem nisi culpa
+                    </p>
+            </div>
+           <div class="row bg-dark text-light p-5">
+               <div class="col-md-4" style="border-right:2px solid white;">
+                   <h4>Lorem Lipsum</h4>
+                   <small>
+                       Nulla aute irure velit consequat in laboris tempor in adipisicing. Labore officia cupidatat nulla dolore exercitation ad. Esse est dolore Lorem nisi culpa
+<                  </small>
+               </div>
+               <div class="col-md-4" style="border-right:2px solid white;">
+                   <ul>
+                       <li>Link 1</li>
+                       <li>Link 2</li>
+                       <li>Link 3</li>
+                   </ul>
+               </div>
+
+           </div>
+
+        </div>
+    </div>
+{% if status %}
+    <script>
+        alert("{{status}}");
+        window.location="/"
+    </script>
+{% endif %}
+</body>
+</html>

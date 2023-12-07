@@ -1,0 +1,28 @@
+<!-- add_money.html -->
+
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block head %}
+<style>
+    .bg-img{
+    background:url("/static/images/cover.jpg");
+}
+</style>
+{% endblock %}
+{% block dashboard %}
+<div class="container mt-5">
+        <h1 class="text-center mb-4">Add Money to Your Wallet</h1>
+
+        <form method="post" action="{% url 'add_money' %}" class="bg-white p-3 rounded shadow-sm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" class="form-control" name="amount" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Money</button>
+        </form>
+
+        <a href="{% url 'view_wallet' %}" class="d-block text-center mt-3 text-primary">Back to Wallet</a>
+    </div>
+
+{% endblock %}
